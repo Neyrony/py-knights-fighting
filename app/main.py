@@ -108,14 +108,20 @@ def duel(knight1: Knight, knight2: Knight) -> None:
 
 
 def battle(knights_config: dict) -> dict[str, int]:
-    lancelot = Knight(knights_config["lancelot"])
-    arthur = Knight(knights_config["arthur"])
-    mordred = Knight(knights_config["mordred"])
-    red_knight = Knight(knights_config["red_knight"])
-    duel(lancelot, mordred)
-    duel(arthur, red_knight)
-    return {"Lancelot": lancelot.stats.hp, "Arthur": arthur.stats.hp,
-            "Mordred": mordred.stats.hp, "Red Knight": red_knight.stats.hp}
+    knight_dict = {knight_name : Knight(knight_stats)
+                   for knight_name, knight_stats in knights_config.items()}
+    # lancelot = Knight(knights_config["lancelot"])
+    # arthur = Knight(knights_config["arthur"])
+    # mordred = Knight(knights_config["mordred"])
+    # red_knight = Knight(knights_config["red_knight"])
+    # duel(lancelot, mordred)
+    # duel(arthur, red_knight)
+    duel(knight_dict["lancelot"], knight_dict["mordred"])
+    duel(knight_dict["arthur"], knight_dict["red_knight"])
+    return {knight.name : knight.stats.hp for knight in knight_dict.values()}
+
+    # return {"Lancelot": lancelot.stats.hp, "Arthur": arthur.stats.hp,
+    #         "Mordred": mordred.stats.hp, "Red Knight": red_knight.stats.hp}
 
 
 if __name__ == "__main__":
